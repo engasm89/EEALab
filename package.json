@@ -8,7 +8,7 @@
     "build": "npm run build:c-mastery && prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && npm install --prefix ./C-Mastery-The-Hacker-s-Journey"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
