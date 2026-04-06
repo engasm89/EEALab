@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  /* Lab dark theme (always-on) */
+  --background: #05070b;
+  --foreground: #d9e7ff;
+  --card: rgba(12, 22, 38, 0.82);
+  --muted: rgba(217, 231, 255, 0.72);
+  --accent: #24f6ff;
+  --accent2: #20ff7a;
+  --border: rgba(217, 231, 255, 0.14);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background:
+    radial-gradient(1200px 650px at 20% -10%, rgba(36, 246, 255, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 85% 15%, rgba(32, 255, 122, 0.12), transparent 52%),
+    radial-gradient(800px 450px at 50% 85%, rgba(36, 246, 255, 0.08), transparent 60%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.eea-gridlines {
+  background-image:
+    linear-gradient(to right, rgba(217, 231, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 231, 255, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.eea-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06) 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: soft-light;
+}
+
+@keyframes circuitPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.eea-circuit-glow {
+  animation: circuitPulse 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(36, 246, 255, 0.55)) drop-shadow(0 0 24px rgba(36, 246, 255, 0.22));
+}

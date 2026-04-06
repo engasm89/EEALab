@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "board": "arduino-uno",
+  "language": "cpp",
+  "assets": [],
+  "entry": "/sim/arduino-blink.js",
+  "ui": {
+    "panels": ["board", "console", "pins"],
+    "pins": [
+      {
+        "name": "D13",
+        "type": "digitalOut"
+      }
+    ]
+  }
+}

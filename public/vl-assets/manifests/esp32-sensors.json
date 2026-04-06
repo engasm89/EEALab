@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "board": "esp32",
+  "language": "micropython",
+  "assets": [],
+  "entry": "/sim/esp32-sensors.js",
+  "ui": {
+    "panels": ["board", "console", "pins"],
+    "pins": [
+      {
+        "name": "A0",
+        "type": "analogIn"
+      },
+      {
+        "name": "GPIO2",
+        "type": "digitalOut"
+      }
+    ]
+  }
+}

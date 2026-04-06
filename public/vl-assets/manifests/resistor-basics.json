@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "board": "arduino-uno",
+  "language": "cpp",
+  "assets": ["resistor-circuit.svg", "multimeter.png"],
+  "entry": "main.cpp",
+  "ui": {
+    "panels": ["board", "console", "pins"],
+    "pins": [
+      {
+        "name": "A0",
+        "type": "analogIn"
+      },
+      {
+        "name": "D2",
+        "type": "digitalOut"
+      },
+      {
+        "name": "D3",
+        "type": "digitalOut"
+      },
+      {
+        "name": "D13",
+        "type": "digitalOut"
+      }
+    ]
+  }
+}

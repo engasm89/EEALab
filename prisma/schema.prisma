@@ -1,0 +1,308 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  logoUrl           String?
+  plan              String   @default("FREE")
+  billingCustomerId String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  memberships       Membership[]
+  labs              Lab[]
+  labRuns           LabRun[]
+  publishRequests   PublishRequest[]
+  plans             Plan[]
+  subscriptions     Subscription[]
+  usageCounters     UsageCounter[]
+  feedback          Feedback[]
+
+  @@map("organizations")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String?
+  email          String   @unique
+  hashedPassword String?
+  locale         String   @default("en")
+  avatarUrl      String?
+  activeOrgId    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  memberships     Membership[]
+  createdLabs     Lab[]        @relation("LabCreator")
+  labRuns         LabRun[]
+  publishRequests PublishRequest[]
+  suggestions     Suggestion[]
+  reviewedRequests PublishRequest[] @relation("PublishRequestReviewer")
+  feedback        Feedback[]
+
+  @@map("users")
+}
+
+model Membership {
+  id     String @id @default(cuid())
+  orgId  String
+  userId String
+  role   Role   @default(STUDENT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, userId])
+  @@map("memberships")
+}
+
+model Lab {
+  id                     String           @id @default(cuid())
+  orgId                  String?          // null = global/public lab
+  title                  String
+  slug                   String           @unique
+  category               LabCategory
+  educationLevels        String[]
+  standards              String[]
+  type                   LabType
+  description            String
+  thumbnailUrl           String?
+  tags                   String[]
+  visibility             LabVisibility    @default(PUBLIC)
+  simulationManifestUrl  String
+  codeTemplates          Json?
+  createdByUserId        String
+  verified               Boolean          @default(false)
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+
+  // Relations
+  organization Organization? @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdBy    User          @relation("LabCreator", fields: [createdByUserId], references: [id])
+  labRuns      LabRun[]
+
+  @@map("labs")
+}
+
+model LabRun {
+  id                    String      @id @default(cuid())
+  orgId                 String
+  labId                 String
+  userId                String
+  mode                  RunMode
+  status                RunStatus   @default(ACTIVE)
+  startedAt             DateTime    @default(now())
+  endedAt               DateTime?
+  runSeconds            Int         @default(0)
+  fastBuildSecondsUsed  Int         @default(0)
+  events                Json?
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  lab          Lab          @relation(fields: [labId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("lab_runs")
+}
+
+model PublishRequest {
+  id                String                @id @default(cuid())
+  orgId             String?               // optional for global submissions
+  submittedByUserId String
+  title             String
+  description       String
+  category          LabCategory
+  educationLevels   String[]
+  standards         String[]
+  manifestUploadUrl String
+  status            PublishRequestStatus  @default(PENDING)
+  reviewerUserId    String?
+  createdAt         DateTime              @default(now())
+  reviewedAt        DateTime?
+
+  // Relations
+  organization Organization? @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  submittedBy  User          @relation(fields: [submittedByUserId], references: [id])
+  reviewer     User?         @relation("PublishRequestReviewer", fields: [reviewerUserId], references: [id])
+
+  @@map("publish_requests")
+}
+
+model Suggestion {
+  id        String   @id @default(cuid())
+  userId    String
+  text      String
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("suggestions")
+}
+
+model Plan {
+  id                      String @id @default(cuid())
+  orgId                   String
+  name                    String
+  tier                    PlanTier
+  seatLimit               Int
+  ultraconcurrentLimit    Int
+  realtimeConcurrencyLimit Int
+  fastBuildMinutes        Int
+  priceId                 String? // Stripe price ID
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@map("plans")
+}
+
+model Subscription {
+  id                 String            @id @default(cuid())
+  orgId              String
+  stripeCustomerId   String
+  stripeSubId        String
+  planId             String
+  status             SubscriptionStatus
+  currentPeriodEnd   DateTime
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+model UsageCounter {
+  id               String @id @default(cuid())
+  orgId            String
+  month            String // YYYY-MM format
+  fastBuildSeconds Int    @default(0)
+  realtimeSessions Int    @default(0)
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, month])
+  @@map("usage_counters")
+}
+
+model Webinar {
+  id       String          @id @default(cuid())
+  title    String
+  startsAt DateTime
+  url      String
+  audience WebinarAudience
+  locale   String          @default("en")
+
+  @@map("webinars")
+}
+
+model HelpArticle {
+  id        String          @id @default(cuid())
+  slug      String          @unique
+  title     String
+  contentMD String
+  audience  WebinarAudience
+  locale    String          @default("en")
+
+  @@map("help_articles")
+}
+
+model Feedback {
+  id      String  @id @default(cuid())
+  userId  String?
+  orgId   String?
+  score   Int     // 0-100 scale
+  path    String
+  comment String?
+  createdAt DateTime @default(now())
+
+  // Relations
+  user         User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  organization Organization? @relation(fields: [orgId], references: [id], onDelete: SetNull)
+
+  @@map("feedback")
+}
+
+// Enums
+enum Role {
+  OWNER
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum LabCategory {
+  BIOLOGY
+  CHEMISTRY
+  ELECTRONICS
+  ENGINEERING
+  PHYSICS
+  ROBOTICS
+}
+
+enum LabType {
+  ULTRACONCURRENT
+  REALTIME
+  SANDBOX
+}
+
+enum LabVisibility {
+  PUBLIC
+  ORG
+  PRIVATE
+}
+
+enum RunMode {
+  SANDBOX
+  REALTIME
+}
+
+enum RunStatus {
+  ACTIVE
+  ENDED
+}
+
+enum PublishRequestStatus {
+  PENDING
+  CHANGES_REQUESTED
+  APPROVED
+  REJECTED
+}
+
+enum PlanTier {
+  FREE
+  HOBBY
+  PRO
+  CLASSROOM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  UNPAID
+}
+
+enum WebinarAudience {
+  SCHOOLS
+  HIGHER_ED
+  ALL
+}
