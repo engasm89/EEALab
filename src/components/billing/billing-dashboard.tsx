@@ -48,7 +48,7 @@ export function BillingDashboard({ user }: BillingDashboardProps) {
   const getStatusBadge = (status: string | null) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-100 text-green-800">Active</Badge>
+        return <Badge className="border border-accent2/30 bg-accent2/15 text-accent2">Active</Badge>
       case "trialing":
         return <Badge className="bg-blue-100 text-blue-800">Trial</Badge>
       case "canceled":

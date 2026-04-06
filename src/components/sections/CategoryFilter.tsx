@@ -9,7 +9,7 @@ function CategoryLink({ category, selected }: { category: ProjectCategory; selec
       className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
         selected
           ? "border-accent/40 bg-accent/10 text-foreground"
-          : "border-white/10 bg-white/5 text-muted hover:border-accent/25 hover:text-foreground"
+          : "border-white/10 bg-white/5 text-muted-foreground hover:border-accent/25 hover:text-foreground"
       }`}
     >
       {category}
@@ -25,7 +25,7 @@ export function CategoryFilter({ selected }: { selected?: ProjectCategory }) {
         className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
           !selected
             ? "border-accent/40 bg-accent/10 text-foreground"
-            : "border-white/10 bg-white/5 text-muted hover:border-accent/25 hover:text-foreground"
+            : "border-white/10 bg-white/5 text-muted-foreground hover:border-accent/25 hover:text-foreground"
         }`}
       >
         All Builds

@@ -5,7 +5,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 export default async function AdminProjectEditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const supabase = getSupabaseServerClient();
-  if (!supabase) return <div className="text-sm text-muted">Supabase not configured.</div>;
+  if (!supabase) return <div className="text-sm text-muted-foreground">Supabase not configured.</div>;
 
   const { data, error } = await supabase.from("projects").select("*").eq("id", id).single();
   if (error || !data) notFound();

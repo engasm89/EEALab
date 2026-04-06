@@ -34,7 +34,7 @@ export function HeroSection() {
             <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
               Building Real Products. Not Just Ideas.
             </h1>
-            <p className="text-pretty text-base leading-relaxed text-muted md:text-lg">
+            <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
               Explore live projects in embedded systems, AI, SaaS, and education — built in public.
               Turn curiosity into feedback, and feedback into shipped improvements.
             </p>
@@ -58,15 +58,15 @@ export function HeroSection() {
 
             <div className="grid gap-3 pt-2 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-semibold text-muted">Authority</div>
+                <div className="text-xs font-semibold text-muted-foreground">Authority</div>
                 <div className="mt-1 text-lg font-semibold text-foreground">IoT + AI + SaaS</div>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-semibold text-muted">Execution</div>
+                <div className="text-xs font-semibold text-muted-foreground">Execution</div>
                 <div className="mt-1 text-lg font-semibold text-foreground">Build logs</div>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="text-xs font-semibold text-muted">Funnel</div>
+                <div className="text-xs font-semibold text-muted-foreground">Funnel</div>
                 <div className="mt-1 text-lg font-semibold text-foreground">Students + Clients</div>
               </div>
             </div>
@@ -78,15 +78,15 @@ export function HeroSection() {
             <div className="rounded-[2rem] border border-white/10 bg-card/50 p-5 backdrop-blur">
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold">Lab Dashboard</div>
-                <div className="text-xs text-muted">Live system view</div>
+                <div className="text-xs text-muted-foreground">Live system view</div>
               </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-muted">Signal</div>
+                  <div className="text-xs text-muted-foreground">Signal</div>
                   <div className="mt-1 flex items-baseline gap-2">
                     <div className="text-3xl font-semibold text-foreground">94</div>
-                    <div className="text-xs text-muted">/100</div>
+                    <div className="text-xs text-muted-foreground">/100</div>
                   </div>
                   <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/8">
                     <div className="h-full w-[94%] rounded-full bg-gradient-to-r from-accent via-accent to-accent2 eea-circuit-glow" />
@@ -94,16 +94,16 @@ export function HeroSection() {
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-muted">Next Ship</div>
+                  <div className="text-xs text-muted-foreground">Next Ship</div>
                   <div className="mt-1 text-sm font-semibold text-foreground">MQTT retry queue</div>
-                  <div className="mt-2 text-xs text-muted">Measured. Tested. Iterated.</div>
+                  <div className="mt-2 text-xs text-muted-foreground">Measured. Tested. Iterated.</div>
                 </div>
               </div>
 
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-semibold">Glowing Nodes</div>
-                  <div className="text-xs text-muted">subtle animation</div>
+                  <div className="text-xs text-muted-foreground">subtle animation</div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-6 gap-3">
@@ -121,7 +121,7 @@ export function HeroSection() {
                 </div>
               </div>
 
-              <div className="mt-4 text-xs text-muted">
+              <div className="mt-4 text-xs text-muted-foreground">
                 This is a product lab: people can{" "}
                 <span className="font-semibold text-foreground">use, test, and benefit</span> from what we build.
               </div>

@@ -388,11 +388,11 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
 
       {/* Collaboration Modal/Panel */}
       {showCollabPanel && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm rounded-lg animate-in fade-in duration-200">
-          <div className="w-96 bg-slate-800 border border-slate-600 rounded-lg p-6 shadow-2xl relative">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-lab-panel/90 backdrop-blur-sm rounded-lg animate-in fade-in duration-200">
+          <div className="w-96 bg-lab-panel border border-lab-line rounded-lg p-6 shadow-2xl relative">
             <button 
               onClick={() => setShowCollabPanel(false)} 
-              className="absolute top-2 right-2 text-slate-400 hover:text-white"
+              className="absolute top-2 right-2 text-lab-muted hover:text-lab-fg"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -406,7 +406,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
 
             {collabStatus === 'connected' ? (
               <div className="text-center space-y-4">
-                <div className="p-4 bg-green-900/20 border border-green-500/30 rounded text-green-400 font-mono text-sm">
+                <div className="p-4 bg-lab-panelDeep/20 border border-lab-cyan/30 rounded text-lab-cyan font-mono text-sm">
                   Uplink Established. <br/> Syncing data streams.
                 </div>
                 <button 
@@ -423,22 +423,22 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
               <div className="space-y-6">
                 {/* Host Section */}
                 <div className="space-y-2">
-                  <p className="text-xs font-mono text-slate-400 uppercase">Option A: Host Session</p>
+                  <p className="text-xs font-mono text-lab-muted uppercase">Option A: Host Session</p>
                   {!myPeerId ? (
                     <button 
                       onClick={startHosting}
-                      className="w-full py-2 bg-slate-700 hover:bg-slate-600 text-white font-mono text-sm rounded border border-slate-600"
+                      className="w-full py-2 bg-lab-panelDeep hover:brightness-110 text-white font-mono text-sm rounded border border-lab-line"
                     >
                       {collabStatus === 'init' ? 'Initializing...' : 'Generate Access Code'}
                     </button>
                   ) : (
-                    <div className="bg-slate-950 p-2 rounded border border-cyan-500/50 flex flex-col gap-1">
-                      <span className="text-[10px] text-slate-500">YOUR ACCESS CODE:</span>
+                    <div className="bg-lab-bg p-2 rounded border border-cyan-500/50 flex flex-col gap-1">
+                      <span className="text-[10px] text-lab-muted">YOUR ACCESS CODE:</span>
                       <div className="flex justify-between items-center">
                         <code className="text-cyan-400 font-mono text-sm select-all">{myPeerId}</code>
                         <button 
                           onClick={() => navigator.clipboard.writeText(myPeerId)}
-                          className="text-slate-400 hover:text-white"
+                          className="text-lab-muted hover:text-lab-fg"
                           title="Copy Code"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -452,25 +452,25 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
                 </div>
 
                 <div className="relative flex py-1 items-center">
-                  <div className="flex-grow border-t border-slate-700"></div>
-                  <span className="flex-shrink-0 mx-4 text-slate-500 text-xs">OR</span>
-                  <div className="flex-grow border-t border-slate-700"></div>
+                  <div className="flex-grow border-t border-lab-line"></div>
+                  <span className="flex-shrink-0 mx-4 text-lab-muted text-xs">OR</span>
+                  <div className="flex-grow border-t border-lab-line"></div>
                 </div>
 
                 {/* Join Section */}
                 <div className="space-y-2">
-                  <p className="text-xs font-mono text-slate-400 uppercase">Option B: Join Session</p>
+                  <p className="text-xs font-mono text-lab-muted uppercase">Option B: Join Session</p>
                   <input 
                     type="text" 
                     placeholder="Enter Host Access Code"
                     value={targetPeerId}
                     onChange={(e) => setTargetPeerId(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono text-sm focus:border-cyan-500 outline-none"
+                    className="w-full bg-lab-bg border border-lab-line p-2 rounded text-white font-mono text-sm focus:border-cyan-500 outline-none"
                   />
                   <button 
                     onClick={joinSession}
                     disabled={!targetPeerId || collabStatus === 'connecting'}
-                    className="w-full py-2 bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-700 disabled:text-slate-500 text-white font-mono text-sm rounded transition-colors"
+                    className="w-full py-2 bg-cyan-700 hover:bg-cyan-600 disabled:bg-lab-panelDeep disabled:text-lab-muted text-white font-mono text-sm rounded transition-colors"
                   >
                     {collabStatus === 'connecting' ? 'Connecting...' : 'Connect to Peer'}
                   </button>
@@ -485,14 +485,14 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
         </div>
       )}
 
-      <div className="flex flex-col border border-slate-700 rounded-lg overflow-hidden bg-slate-900 shadow-xl mt-8 mb-4">
+      <div className="flex flex-col border border-lab-line rounded-lg overflow-hidden bg-lab-panel shadow-xl mt-8 mb-4">
         {/* Toolbar */}
-        <div className="bg-slate-800 p-2 flex items-center justify-between border-b border-slate-700">
+        <div className="bg-lab-panel p-2 flex items-center justify-between border-b border-lab-line">
           <div className="flex items-center gap-2 px-2">
             <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <span className="text-xs font-mono text-slate-300">main.c</span>
+            <span className="text-xs font-mono text-lab-fg">main.c</span>
             {collabStatus === 'connected' && (
               <span className="ml-2 px-1.5 py-0.5 rounded bg-cyan-900/50 border border-cyan-500/30 text-[10px] text-cyan-400 font-mono animate-pulse">
                 • LINKED
@@ -507,7 +507,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
               className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold font-mono transition-all mr-2
                 ${collabStatus === 'connected' 
                   ? 'bg-cyan-900/30 text-cyan-400 border border-cyan-700 hover:bg-cyan-900/50 shadow-[0_0_10px_rgba(34,211,238,0.3)]' 
-                  : 'bg-slate-700 hover:bg-slate-600 text-slate-300 border border-transparent'}`}
+                  : 'bg-lab-panelDeep hover:brightness-110 text-lab-fg border border-transparent'}`}
               title="Real-time Collaboration"
             >
                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -518,7 +518,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
 
             {/* Status Message */}
             {(saveStatus === 'saved' || saveStatus === 'loaded') && (
-              <span className="text-xs font-mono text-green-400 animate-fade-in mr-2">
+              <span className="text-xs font-mono text-lab-cyan animate-fade-in mr-2">
                 {saveStatus === 'saved' ? 'Saved to Storage' : 'Loaded from Storage'}
               </span>
             )}
@@ -526,7 +526,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
             {/* Load Button */}
             <button
               onClick={handleLoad}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors group relative"
+              className="p-1.5 text-lab-muted hover:text-lab-fg hover:bg-lab-panelDeep rounded transition-colors group relative"
               title="Load from Browser Storage"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -537,7 +537,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
             {/* Save Button */}
             <button
               onClick={handleSave}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors group relative mr-2"
+              className="p-1.5 text-lab-muted hover:text-lab-fg hover:bg-lab-panelDeep rounded transition-colors group relative mr-2"
               title="Save to Browser Storage"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -565,8 +565,8 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
               disabled={isRunning}
               className={`flex items-center gap-2 px-4 py-1.5 rounded text-xs font-bold font-mono transition-all ${
                 isRunning 
-                  ? 'bg-slate-700 text-slate-500 cursor-wait' 
-                  : 'bg-green-600 hover:bg-green-500 text-slate-950 hover:shadow-[0_0_10px_rgba(22,163,74,0.5)]'
+                  ? 'bg-lab-panelDeep text-lab-muted cursor-wait' 
+                  : 'bg-lab-cyan hover:bg-lab-green text-lab-bg hover:shadow-[0_0_10px_rgba(36,246,255,0.35)]'
               }`}
             >
               {isRunning ? (
@@ -594,7 +594,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
           {/* Line Numbers */}
           <div 
             ref={lineNumbersRef}
-            className="w-10 bg-slate-900 text-slate-600 text-right pr-2 pt-4 select-none border-r border-slate-800 z-20 overflow-hidden"
+            className="w-10 bg-lab-panel text-lab-muted text-right pr-2 pt-4 select-none border-r border-lab-line z-20 overflow-hidden"
           >
             <pre className="font-mono text-sm leading-6">{lineNumbers}</pre>
           </div>
@@ -631,7 +631,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
           {showSuggestions && (
             <ul 
               ref={suggestionsListRef}
-              className="absolute z-50 bg-slate-800 border border-slate-600 rounded-lg shadow-2xl max-h-60 overflow-y-auto w-56 font-mono text-sm animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-100 custom-scrollbar"
+              className="absolute z-50 bg-lab-panel border border-lab-line rounded-lg shadow-2xl max-h-60 overflow-y-auto w-56 font-mono text-sm animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-100 custom-scrollbar"
               style={{ top: suggestionCoords.top, left: suggestionCoords.left }}
             >
               {suggestions.map((suggestion, idx) => (
@@ -641,7 +641,7 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
                   className={`px-3 py-2 cursor-pointer flex justify-between items-center transition-colors duration-75 ${
                     idx === suggestionIndex 
                       ? 'bg-blue-600/20 text-blue-200 border-l-4 border-blue-500 pl-2' 
-                      : 'text-slate-400 hover:bg-slate-700/50 border-l-4 border-transparent pl-2'
+                      : 'text-lab-muted hover:bg-lab-panelDeep/50 border-l-4 border-transparent pl-2'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -656,14 +656,14 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
         </div>
 
         {/* IO Panel */}
-        <div className="flex flex-col h-40 border-t border-slate-700 bg-slate-950">
-          <div className="flex border-b border-slate-800">
+        <div className="flex flex-col h-40 border-t border-lab-line bg-lab-bg">
+          <div className="flex border-b border-lab-line">
             <button
               onClick={() => setActiveTab('input')}
               className={`px-4 py-1 text-xs font-mono transition-colors ${
                 activeTab === 'input' 
-                  ? 'bg-slate-800 text-white border-t-2 border-green-500' 
-                  : 'text-slate-500 hover:text-slate-300'
+                  ? 'bg-lab-panel text-white border-t-2 border-lab-cyan' 
+                  : 'text-lab-muted hover:text-lab-fg'
               }`}
             >
               STDIN (Input)
@@ -672,8 +672,8 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
               onClick={() => setActiveTab('output')}
               className={`px-4 py-1 text-xs font-mono transition-colors ${
                 activeTab === 'output' 
-                  ? 'bg-slate-800 text-white border-t-2 border-green-500' 
-                  : 'text-slate-500 hover:text-slate-300'
+                  ? 'bg-lab-panel text-white border-t-2 border-lab-cyan' 
+                  : 'text-lab-muted hover:text-lab-fg'
               }`}
             >
               STDOUT (Output)
@@ -686,21 +686,21 @@ export default function CodeEditor({ initialCode = '', onExplain }: Props) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Enter input for scanf here..."
-                className="w-full h-full bg-slate-950 text-slate-300 p-3 text-sm font-mono resize-none outline-none"
+                className="w-full h-full bg-lab-bg text-lab-fg p-3 text-sm font-mono resize-none outline-none"
                 spellCheck="false"
               />
             ) : (
               <>
-                <pre className="w-full h-full bg-black text-green-400 p-3 text-sm font-mono overflow-auto custom-scrollbar whitespace-pre-wrap">
+                <pre className="w-full h-full bg-black text-lab-cyan p-3 text-sm font-mono overflow-auto custom-scrollbar whitespace-pre-wrap">
                   {output}
                 </pre>
                 <button
                   onClick={handleCopyOutput}
-                  className="absolute top-2 right-2 p-1.5 bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white rounded border border-slate-700 backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+                  className="absolute top-2 right-2 p-1.5 bg-lab-panel/80 hover:bg-lab-panelDeep text-lab-muted hover:text-lab-fg rounded border border-lab-line backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
                   title="Copy Output"
                 >
                   {isCopied ? (
-                    <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-4 h-4 text-lab-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   ) : (

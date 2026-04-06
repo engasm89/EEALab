@@ -19,7 +19,7 @@ export function ShippedHighlightsSection({ items }: { items: Item[] }) {
           {items.map((it) => (
             <div key={it.id} className="rounded-xl border border-white/10 bg-background/20 p-4">
               <div className="text-sm font-semibold">{it.request_text}</div>
-              {it.public_note ? <div className="mt-1 text-xs text-muted">{it.public_note}</div> : null}
+              {it.public_note ? <div className="mt-1 text-xs text-muted-foreground">{it.public_note}</div> : null}
               {it.project_slug ? (
                 <Link href={`/projects/${it.project_slug}`} className="mt-2 inline-block text-xs text-accent hover:underline">
                   View {it.project_name ?? "project"}

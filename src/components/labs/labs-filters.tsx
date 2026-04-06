@@ -28,7 +28,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const LAB_TYPES = [
-  { value: "ULTRACONCURRENT", label: "Ultra-concurrent", icon: Zap, color: "text-green-600" },
+  { value: "ULTRACONCURRENT", label: "Ultra-concurrent", icon: Zap, color: "text-accent2" },
   { value: "REALTIME", label: "Real-time", icon: Beaker, color: "text-blue-600" },
   { value: "SANDBOX", label: "Sandbox", icon: Cpu, color: "text-purple-600" },
 ]
@@ -44,7 +44,7 @@ const CATEGORIES = [
 
 const EDUCATION_LEVELS = [
   { value: "Elementary School", label: "Elementary School", icon: GraduationCap, color: "text-blue-600" },
-  { value: "Middle School", label: "Middle School", icon: GraduationCap, color: "text-green-600" },
+  { value: "Middle School", label: "Middle School", icon: GraduationCap, color: "text-accent2" },
   { value: "High School", label: "High School", icon: GraduationCap, color: "text-orange-600" },
   { value: "University", label: "University", icon: GraduationCap, color: "text-purple-600" },
   { value: "Graduate", label: "Graduate", icon: GraduationCap, color: "text-red-600" },

@@ -65,7 +65,7 @@ export function AdminAssetUploader({ projectId }: { projectId: string }) {
   return (
     <div className="rounded-xl border border-white/10 bg-background/20 p-4">
       <div className="text-sm font-semibold">Upload Asset</div>
-      <p className="mt-1 text-xs text-muted">Upload image/video and attach to project assets.</p>
+      <p className="mt-1 text-xs text-muted-foreground">Upload image/video and attach to project assets.</p>
       <div className="mt-3 flex items-center gap-2">
         <input
           ref={inputRef}
@@ -81,7 +81,7 @@ export function AdminAssetUploader({ projectId }: { projectId: string }) {
           {status === "uploading" ? "Uploading..." : "Choose file"}
         </button>
       </div>
-      {message ? <p className="mt-2 text-xs text-muted">{message}</p> : null}
+      {message ? <p className="mt-2 text-xs text-muted-foreground">{message}</p> : null}
     </div>
   );
 }

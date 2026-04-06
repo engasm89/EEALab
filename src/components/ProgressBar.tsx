@@ -2,7 +2,7 @@ export function ProgressBar({ value }: { value: number }) {
   const safe = Math.max(0, Math.min(100, value));
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs text-muted">
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>Progress</span>
         <span className="font-mono">{safe}%</span>
       </div>

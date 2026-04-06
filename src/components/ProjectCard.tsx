@@ -11,7 +11,7 @@ function MonetizationChip({ stage }: { stage: MonetizationStage }) {
   const tone: Record<MonetizationStage, string> = {
     Free: "border-accent/25 bg-accent/10 text-accent",
     Paid: "border-accent2/25 bg-accent2/10 text-accent2",
-    MVP: "border-white/15 bg-white/6 text-muted",
+    MVP: "border-white/15 bg-white/6 text-muted-foreground",
     Scaled: "border-accent2/20 bg-accent2/5 text-accent2",
   };
 
@@ -26,7 +26,7 @@ function MonetizationChip({ stage }: { stage: MonetizationStage }) {
 
 function CategoryPill({ category }: { category: ProjectCategory }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-white/12 bg-white/5 px-3 py-1 text-[11px] font-semibold text-muted">
+    <span className="inline-flex items-center rounded-full border border-white/12 bg-white/5 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
       {category}
     </span>
   );
@@ -60,7 +60,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <h3 className="mt-4 text-base font-semibold tracking-tight md:text-lg">{project.name}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{project.description}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
 
       <div className="mt-5">
         <ProgressBar value={project.progress} />
@@ -74,7 +74,7 @@ export function ProjectCard({ project }: { project: Project }) {
         >
           Open Project
         </Link>
-        <div className="hidden text-xs text-muted md:block">
+        <div className="hidden text-xs text-muted-foreground md:block">
           Next: <span className="font-mono text-foreground">{project.next_step}</span>
         </div>
       </div>

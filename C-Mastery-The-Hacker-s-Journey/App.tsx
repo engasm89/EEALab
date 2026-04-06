@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { CURRICULUM } from './constants';
-import { Level, UserState, AppView } from './types';
+import { UserState, AppView } from './types';
 import LevelMap from './components/LevelMap';
 import LevelView from './components/LevelView';
 import Dashboard from './components/Dashboard';
@@ -85,8 +85,14 @@ export default function App() {
   const activeLevel = CURRICULUM.find(l => l.id === activeLevelId);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-green-50 font-sans selection:bg-green-900 selection:text-green-50">
-      <div className="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-50 pointer-events-none"></div>
+    <div className="min-h-screen bg-lab-bg text-lab-fg font-sans selection:bg-lab-cyan/25 selection:text-lab-fg">
+      <div
+        className="pointer-events-none fixed inset-0 opacity-30"
+        style={{
+          background:
+            'radial-gradient(1200px 650px at 20% -10%, rgba(36,246,255,0.12), transparent 55%), radial-gradient(900px 500px at 85% 15%, rgba(32,255,122,0.08), transparent 52%)',
+        }}
+      />
       
       <Dashboard 
         xp={userState.xp} 

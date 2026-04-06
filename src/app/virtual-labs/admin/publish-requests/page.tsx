@@ -66,8 +66,8 @@ export default async function PublishRequestsPage() {
                 <CardTitle className="text-sm font-medium">Approved</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
-                <Badge className="mt-1 bg-green-100 text-green-800">Published</Badge>
+                <div className="text-2xl font-bold text-accent2">{stats.approved}</div>
+                <Badge className="mt-1 border border-accent2/30 bg-accent2/15 text-accent2">Published</Badge>
               </CardContent>
             </Card>
 

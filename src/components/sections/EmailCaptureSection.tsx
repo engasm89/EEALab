@@ -52,7 +52,7 @@ export function EmailCaptureSection() {
           <div>
             <div className="text-xs font-semibold tracking-wide text-accent">FOLLOW WHAT I AM BUILDING</div>
             <h2 className="mt-3 text-2xl font-semibold">Early access to tools. Free build resources.</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Get behind-the-scenes updates, execution lessons, and practical templates you can reuse.
               No spam. Just shipping.
             </p>
@@ -60,7 +60,7 @@ export function EmailCaptureSection() {
 
           <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-white/10 bg-background/30 p-5">
             <div>
-              <label className="block text-xs font-semibold text-muted" htmlFor="eea-name">
+              <label className="block text-xs font-semibold text-muted-foreground" htmlFor="eea-name">
                 Name
               </label>
               <input
@@ -73,7 +73,7 @@ export function EmailCaptureSection() {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-muted" htmlFor="eea-email">
+              <label className="block text-xs font-semibold text-muted-foreground" htmlFor="eea-email">
                 Email
               </label>
               <input

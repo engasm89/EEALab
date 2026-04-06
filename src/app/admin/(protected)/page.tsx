@@ -34,7 +34,7 @@ export default async function AdminDashboardPage() {
         <Metric title="Submitted requests" value={counts.featureSubmitted} />
         <Metric title="Captured leads" value={counts.leads} />
       </div>
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-muted">
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-muted-foreground">
         Next steps: update project media links, moderate feedback, and move feature requests across lifecycle.
         <div className="mt-4">
           <Link href="/admin/projects" className="rounded-full bg-accent px-4 py-2 text-xs font-semibold text-background">
@@ -49,7 +49,7 @@ export default async function AdminDashboardPage() {
 function Metric({ title, value }: { title: string; value: number }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-      <div className="text-xs text-muted">{title}</div>
+      <div className="text-xs text-muted-foreground">{title}</div>
       <div className="mt-2 text-3xl font-semibold">{value}</div>
     </div>
   );

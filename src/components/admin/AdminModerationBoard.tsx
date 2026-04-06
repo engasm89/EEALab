@@ -86,7 +86,7 @@ export function AdminModerationBoard({
           {filteredFeedback.length ? (
             filteredFeedback.map((row) => (
               <div key={row.id} className="rounded-xl border border-white/10 bg-background/20 p-4">
-                <label className="mb-2 flex items-center gap-2 text-xs text-muted">
+                <label className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                   <input
                     type="checkbox"
                     checked={selected.includes(row.id)}
@@ -106,7 +106,7 @@ export function AdminModerationBoard({
               </div>
             ))
           ) : (
-            <p className="text-sm text-muted">No pending feedback.</p>
+            <p className="text-sm text-muted-foreground">No pending feedback.</p>
           )}
         </div>
       </section>
@@ -118,7 +118,7 @@ export function AdminModerationBoard({
             requestRows.map((row) => (
               <div key={row.id} className="rounded-xl border border-white/10 bg-background/20 p-4">
                 <div className="text-sm">{row.request_text}</div>
-                <div className="mt-1 text-xs text-muted">Current: {row.status}</div>
+                <div className="mt-1 text-xs text-muted-foreground">Current: {row.status}</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {(["planned", "in_progress", "shipped", "rejected"] as const).map((s) => (
                     <button key={s} onClick={() => void moveRequest(row.id, s)} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs">
@@ -129,7 +129,7 @@ export function AdminModerationBoard({
               </div>
             ))
           ) : (
-            <p className="text-sm text-muted">No submitted feature requests.</p>
+            <p className="text-sm text-muted-foreground">No submitted feature requests.</p>
           )}
         </div>
       </section>
@@ -140,17 +140,17 @@ export function AdminModerationBoard({
           {eventRows.length ? (
             eventRows.slice(0, 30).map((row) => (
               <div key={row.id} className="rounded-xl border border-white/10 bg-background/20 p-3">
-                <div className="text-xs text-muted">{new Date(row.created_at).toLocaleString()}</div>
+                <div className="text-xs text-muted-foreground">{new Date(row.created_at).toLocaleString()}</div>
                 <div className="text-sm">{row.event_type}</div>
               </div>
             ))
           ) : (
-            <p className="text-sm text-muted">No timeline events yet.</p>
+            <p className="text-sm text-muted-foreground">No timeline events yet.</p>
           )}
         </div>
       </section>
 
-      {msg ? <div className="text-sm text-muted">{msg}</div> : null}
+      {msg ? <div className="text-sm text-muted-foreground">{msg}</div> : null}
     </div>
   );
 }

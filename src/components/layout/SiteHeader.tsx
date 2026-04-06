@@ -14,27 +14,27 @@ export function SiteHeader() {
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold text-foreground">Ashraf Engineering Lab</div>
-            <div className="text-xs text-muted">Embedded • AI • IoT • SaaS</div>
+            <div className="text-xs text-muted-foreground">Embedded • AI • IoT • SaaS</div>
           </div>
         </div>
 
         <nav className="flex max-w-[min(100%,28rem)] flex-1 flex-wrap items-center justify-center gap-x-4 gap-y-2 md:max-w-none md:justify-center md:gap-6">
-          <Link href="/?category=Embedded%20Systems" className="text-sm text-muted hover:text-foreground transition-colors">
+          <Link href="/?category=Embedded%20Systems" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Explore
           </Link>
-          <Link href="#follow" className="text-sm text-muted hover:text-foreground transition-colors">
+          <Link href="#follow" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Follow the Build
           </Link>
           <Link
             href="/?category=AI%20Tools"
-            className="text-sm text-muted hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Builder Notes
           </Link>
-          <Link href="/c-mastery/" className="text-sm text-muted hover:text-foreground transition-colors">
+          <Link href="/c-mastery/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             C-Mastery
           </Link>
-          <Link href="/virtual-labs" className="text-sm text-muted hover:text-foreground transition-colors">
+          <Link href="/virtual-labs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             VirtualLabs
           </Link>
         </nav>

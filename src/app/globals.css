@@ -1,25 +1,109 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* Lab dark + shadcn-aligned tokens (single source of truth) */
 :root {
-  /* Lab dark theme (always-on) */
   --background: #05070b;
   --foreground: #d9e7ff;
+
   --card: rgba(12, 22, 38, 0.82);
-  --muted: rgba(217, 231, 255, 0.72);
+  --card-foreground: #d9e7ff;
+
+  --popover: rgba(12, 22, 38, 0.96);
+  --popover-foreground: #d9e7ff;
+
+  /* Primary CTA = cyan accent */
+  --primary: #24f6ff;
+  --primary-foreground: #05070b;
+
+  /* Secondary = lab green */
+  --secondary: rgba(32, 255, 122, 0.14);
+  --secondary-foreground: #d9e7ff;
+
+  /* Muted = surface (shadcn bg-muted); copy uses muted-foreground */
+  --muted: rgba(217, 231, 255, 0.08);
+  --muted-foreground: rgba(217, 231, 255, 0.72);
+
+  /* Accent = lab cyan (marketing + shadcn hovers; same hue as primary) */
   --accent: #24f6ff;
+  --accent-foreground: #05070b;
+
+  /* Lab marketing accents (explicit) */
   --accent2: #20ff7a;
+
+  --destructive: #f87171;
+  --destructive-foreground: #05070b;
+
   --border: rgba(217, 231, 255, 0.14);
+  --input: rgba(217, 231, 255, 0.14);
+  --ring: rgba(36, 246, 255, 0.45);
+
+  --radius: 0.75rem;
+
+  --chart-1: #24f6ff;
+  --chart-2: #20ff7a;
+  --chart-3: #a78bfa;
+  --chart-4: #fbbf24;
+  --chart-5: #f87171;
+
+  --sidebar: rgba(12, 22, 38, 0.95);
+  --sidebar-foreground: #d9e7ff;
+  --sidebar-primary: #24f6ff;
+  --sidebar-primary-foreground: #05070b;
+  --sidebar-accent: rgba(32, 255, 122, 0.12);
+  --sidebar-accent-foreground: #d9e7ff;
+  --sidebar-border: rgba(217, 231, 255, 0.14);
+  --sidebar-ring: rgba(36, 246, 255, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-accent2: var(--accent2);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
 }
 
 body {
@@ -30,6 +114,7 @@ body {
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
 .eea-gridlines {
@@ -66,4 +151,74 @@ body {
 .eea-circuit-glow {
   animation: circuitPulse 2.4s ease-in-out infinite;
   filter: drop-shadow(0 0 10px rgba(36, 246, 255, 0.55)) drop-shadow(0 0 24px rgba(36, 246, 255, 0.22));
+}
+
+/* VirtualLabs utility classes (no duplicate :root) */
+.scientific-notation {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+}
+
+.circuit-element {
+  @apply stroke-current stroke-2;
+}
+
+.lab-card {
+  @apply relative overflow-hidden;
+  background: linear-gradient(135deg, var(--card) 0%, var(--muted) 100%);
+}
+
+.lab-card::before {
+  content: "";
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+  z-index: -1;
+}
+
+.lab-card:hover::before {
+  @apply opacity-5;
+}
+
+.interactive-element {
+  @apply transition-all duration-200 ease-out;
+}
+
+.interactive-element:hover {
+  @apply scale-105 shadow-lg;
+}
+
+.scientific-grid {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--primary);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }

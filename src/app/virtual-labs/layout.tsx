@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Providers } from "@/components/providers";
+import { VirtualLabsShell } from "@/components/layout/VirtualLabsShell";
 
 export const metadata: Metadata = {
   title: "VirtualLabs — Interactive STEM Labs",
@@ -10,5 +10,9 @@ export const metadata: Metadata = {
 export default function VirtualLabsLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <Providers>{children}</Providers>;
+  return (
+    <Providers>
+      <VirtualLabsShell>{children}</VirtualLabsShell>
+    </Providers>
+  );
 }

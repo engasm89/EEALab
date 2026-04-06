@@ -1,70 +1,59 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Beaker, Plus, Search, Filter, Sparkles } from "lucide-react"
+import { Plus, Search, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 export function LabsHeader() {
   return (
-    <header className="border-b border-border/50 bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/80 sticky top-0 z-40">
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <Beaker className="h-8 w-8 text-primary group-hover:text-accent transition-colors duration-200" />
-              <div className="absolute -top-1 -right-1 h-3 w-3 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent group-hover:from-accent group-hover:to-primary transition-all duration-200">
-              VirtualLabs
-            </span>
-          </Link>
-
-          <div className="hidden md:flex items-center space-x-4 flex-1 max-w-lg mx-8">
-            <div className="relative flex-1 group">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
-              <Input 
-                placeholder="Search labs by topic, category, or author..." 
-                className="pl-10 pr-4 py-3 border-2 border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-background/50 backdrop-blur-sm hover:bg-background/80" 
+    <div className="sticky top-0 z-30 border-b border-white/10 bg-background/80 backdrop-blur-md">
+      <div className="mx-auto w-full max-w-6xl px-4 py-4">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="min-w-0 flex-1 md:max-w-xl md:pr-6 lg:max-w-2xl">
+            <div className="group relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+              <Input
+                placeholder="Search labs by topic, category, or author…"
+                className="border-white/10 bg-white/5 pl-10 backdrop-blur-sm transition-colors hover:bg-white/8 focus:border-primary/40"
               />
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+              <div className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 sm:block">
+                <kbd className="inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   <span className="text-xs">⌘</span>K
                 </kbd>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" asChild className="border-2 hover:bg-primary/10 hover:border-primary transition-all duration-200 group">
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <Button variant="outline" asChild className="border-white/10 bg-white/5 hover:border-primary/35 hover:bg-primary/10">
               <Link href="/virtual-labs/publish">
-                <Plus className="mr-2 h-4 w-4 group-hover:rotate-90 transition-transform duration-200" />
-                Publish Lab
+                <Plus className="mr-2 h-4 w-4" />
+                Publish lab
               </Link>
             </Button>
-            <Button asChild className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-200">
+            <Button asChild className="bg-primary font-semibold text-primary-foreground shadow-[0_0_0_1px_rgba(36,246,255,0.35)] hover:brightness-110">
               <Link href="/virtual-labs/auth/signin">
                 <Sparkles className="mr-2 h-4 w-4" />
-                Sign In
+                Sign in
               </Link>
             </Button>
           </div>
         </div>
-        
-        {/* Quick Stats */}
-        <div className="mt-4 flex items-center justify-center space-x-8 text-sm text-muted-foreground">
-          <div className="flex items-center space-x-2">
-            <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
-            <span>2,847+ Interactive Labs</span>
+
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground md:justify-start">
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            <span>Interactive labs catalog</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="h-2 w-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-            <span>15+ STEM Categories</span>
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" style={{ animationDelay: "0.5s" }} />
+            <span>STEM categories</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="h-2 w-2 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-            <span>50K+ Students Learning</span>
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent2" style={{ animationDelay: "1s" }} />
+            <span>In-browser IDE</span>
           </div>
         </div>
       </div>
-    </header>
+    </div>
   )
 }

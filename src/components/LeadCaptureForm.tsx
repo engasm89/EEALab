@@ -64,7 +64,7 @@ export function LeadCaptureForm({ slug }: { slug: string }) {
       <button disabled={status === "loading"} className="w-full rounded-xl bg-accent px-3 py-2 text-sm font-semibold text-background disabled:opacity-60">
         {status === "loading" ? "Submitting..." : "Submit"}
       </button>
-      {msg ? <div className="text-xs text-muted">{msg}</div> : null}
+      {msg ? <div className="text-xs text-muted-foreground">{msg}</div> : null}
     </form>
   );
 }

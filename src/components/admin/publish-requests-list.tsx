@@ -26,7 +26,7 @@ export function PublishRequestsList({ requests }: PublishRequestsListProps) {
       case "PENDING":
         return <Clock className="h-4 w-4 text-yellow-600" />
       case "APPROVED":
-        return <CheckCircle className="h-4 w-4 text-green-600" />
+        return <CheckCircle className="h-4 w-4 text-accent2" />
       case "REJECTED":
         return <XCircle className="h-4 w-4 text-red-600" />
       case "CHANGES_REQUESTED":
@@ -39,15 +39,15 @@ export function PublishRequestsList({ requests }: PublishRequestsListProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "PENDING":
-        return "bg-yellow-100 text-yellow-800"
+        return "border border-amber-500/30 bg-amber-500/10 text-amber-400"
       case "APPROVED":
-        return "bg-green-100 text-green-800"
+        return "border border-accent2/30 bg-accent2/15 text-accent2"
       case "REJECTED":
-        return "bg-red-100 text-red-800"
+        return "border border-red-500/35 bg-red-500/10 text-red-400"
       case "CHANGES_REQUESTED":
-        return "bg-orange-100 text-orange-800"
+        return "border border-orange-500/35 bg-orange-500/10 text-orange-400"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "border border-white/10 bg-white/5 text-muted-foreground"
     }
   }
 

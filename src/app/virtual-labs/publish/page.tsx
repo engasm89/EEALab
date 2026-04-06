@@ -61,7 +61,7 @@ export default async function PublishPage() {
                 </div>
                 <div className="text-center space-y-2">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
+                    <CheckCircle className="h-6 w-6 text-accent2" />
                   </div>
                   <h3 className="font-semibold">Published</h3>
                   <p className="text-sm text-muted-foreground">Your lab goes live in the catalog</p>
@@ -89,7 +89,7 @@ export default async function PublishPage() {
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-semibold mb-2 text-green-600">✓ Do</h3>
+                  <h3 className="font-semibold mb-2 text-accent2">✓ Do</h3>
                   <ul className="text-sm space-y-1 text-muted-foreground">
                     <li>• Provide clear, educational content</li>
                     <li>• Include detailed descriptions</li>

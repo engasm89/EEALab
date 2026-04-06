@@ -133,7 +133,7 @@ export function AdminProjectEditor({ project }: { project: AdminProject }) {
         <button onClick={save} className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-background">
           {status === "saving" ? "Saving..." : "Save project"}
         </button>
-        {message ? <span className="text-sm text-muted">{message}</span> : null}
+        {message ? <span className="text-sm text-muted-foreground">{message}</span> : null}
       </div>
     </div>
   );
@@ -142,7 +142,7 @@ export function AdminProjectEditor({ project }: { project: AdminProject }) {
 function Input({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
     <label className="block">
-      <span className="text-xs text-muted">{label}</span>
+      <span className="text-xs text-muted-foreground">{label}</span>
       <input value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full rounded-xl border border-white/10 bg-background/30 px-3 py-2 text-sm" />
     </label>
   );
@@ -151,7 +151,7 @@ function Input({ label, value, onChange }: { label: string; value: string; onCha
 function Textarea({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
     <label className="block mt-3">
-      <span className="text-xs text-muted">{label}</span>
+      <span className="text-xs text-muted-foreground">{label}</span>
       <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={3} className="mt-1 w-full rounded-xl border border-white/10 bg-background/30 px-3 py-2 text-sm" />
     </label>
   );
@@ -170,7 +170,7 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="text-xs text-muted">{label}</span>
+      <span className="text-xs text-muted-foreground">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -56,21 +56,21 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <header className="sticky top-0 z-50 bg-lab-panel/90 backdrop-blur-md border-b border-lab-line shadow-lg">
         <div className="container mx-auto px-4 h-auto py-3 md:h-20 md:py-0 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
           <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 bg-green-600 rounded flex items-center justify-center font-mono font-bold text-slate-950 shadow-[0_0_10px_rgba(22,163,74,0.5)]">
+              <div className="h-8 w-8 bg-lab-cyan rounded flex items-center justify-center font-mono font-bold text-lab-bg shadow-[0_0_10px_rgba(36,246,255,0.35)]">
                 C
               </div>
-              <h1 className="font-mono font-bold text-lg tracking-tight text-green-400 block">
-                C-Mastery<span className="text-slate-500">_Protocol</span>
+              <h1 className="font-mono font-bold text-lg tracking-tight text-lab-cyan block">
+                C-Mastery<span className="text-lab-muted">_Protocol</span>
               </h1>
             </div>
             
             {/* Mobile Rank Display */}
             <div className="md:hidden flex flex-col items-end font-mono text-xs">
-               <span className="text-green-400 font-bold">{rankName}</span>
+               <span className="text-lab-cyan font-bold">{rankName}</span>
                <span className="text-yellow-500">{xp} XP</span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
             {/* Settings Button */}
             <button 
               onClick={() => setShowSettings(true)}
-              className="text-slate-400 hover:text-green-400 transition-colors p-1"
+              className="text-lab-muted hover:text-lab-cyan transition-colors p-1"
               title="System Configuration"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,18 +96,18 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
 
             {/* Desktop Rank Display */}
             <div className="hidden md:flex flex-col items-end">
-              <span className="text-slate-500 text-[10px] uppercase tracking-widest">Rank</span>
-              <span className="text-green-400 font-bold text-shadow-sm">{rankName}</span>
+              <span className="text-lab-muted text-[10px] uppercase tracking-widest">Rank</span>
+              <span className="text-lab-cyan font-bold text-shadow-sm">{rankName}</span>
             </div>
             
             {/* XP Progress Bar */}
             <div className="flex flex-col items-end w-full md:w-[160px]">
-              <div className="flex justify-between w-full text-[10px] uppercase tracking-wider text-slate-400 mb-1.5 gap-2">
+              <div className="flex justify-between w-full text-[10px] uppercase tracking-wider text-lab-muted mb-1.5 gap-2">
                 <span>XP Progress</span>
                 <span className="text-yellow-500 font-bold">{xp}{nextThreshold ? ` / ${nextThreshold}` : ''}</span>
               </div>
               
-              <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-800 relative group shadow-inner" title={`Progress to next rank: ${Math.round(progress)}%`}>
+              <div className="w-full h-3 bg-lab-bg rounded-full overflow-hidden border border-lab-line relative group shadow-inner" title={`Progress to next rank: ${Math.round(progress)}%`}>
                 {/* The Moving Bar */}
                 <div 
                   className="h-full bg-gradient-to-r from-yellow-700 via-yellow-500 to-yellow-400 transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(234,179,8,0.4)] relative"
@@ -124,7 +124,7 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
 
             {/* Level Progress Visual - Wrapped for 20 levels */}
             <div className="flex flex-col items-end hidden lg:flex">
-              <span className="text-slate-500 text-[10px] uppercase tracking-widest mb-1">Journey</span>
+              <span className="text-lab-muted text-[10px] uppercase tracking-widest mb-1">Journey</span>
               <div className="flex flex-wrap justify-end gap-1 w-[160px]">
                 {Array.from({ length: totalLevels }).map((_, i) => {
                   const isUnlocked = i < unlockedCount;
@@ -134,7 +134,7 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
                       className={`w-1.5 h-3 rounded-[1px] transition-all duration-500 ${
                         isUnlocked 
                           ? 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] scale-100' 
-                          : 'bg-slate-800 border border-slate-700 scale-90'
+                          : 'bg-lab-panel border border-lab-line scale-90'
                       }`}
                       title={`Level ${i + 1}: ${isUnlocked ? 'Unlocked' : 'Locked'}`}
                     />
@@ -148,17 +148,17 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
 
       {/* Settings Modal */}
       {showSettings && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-md bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-lab-bg/90 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-md bg-lab-panel border border-lab-line rounded-xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="bg-lab-panel p-4 border-b border-lab-line flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-lab-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <h3 className="font-mono font-bold text-white">System Configuration</h3>
               </div>
-              <button onClick={() => setShowSettings(false)} className="text-slate-400 hover:text-white">
+              <button onClick={() => setShowSettings(false)} className="text-lab-muted hover:text-lab-fg">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -168,38 +168,38 @@ export default function Dashboard({ xp, unlockedCount, isSaving = false, onReset
             <div className="p-6 space-y-6">
               {/* AI Settings */}
               <div className="space-y-3">
-                <label className="text-xs font-mono text-green-400 uppercase tracking-wider">Neural Link (AI Provider)</label>
+                <label className="text-xs font-mono text-lab-cyan uppercase tracking-wider">Neural Link (AI Provider)</label>
                 <div className="relative">
-                  <select className="w-full bg-slate-950 border border-slate-700 text-slate-300 text-sm font-mono rounded p-3 focus:outline-none focus:border-green-500 appearance-none">
+                  <select className="w-full bg-lab-bg border border-lab-line text-lab-fg text-sm font-mono rounded p-3 focus:outline-none focus:border-lab-cyan appearance-none">
                     <option value="gemini">Google Gemini 2.5 Flash (Active)</option>
                     <option value="openai" disabled>OpenAI GPT-4o (Module Not Installed)</option>
                     <option value="anthropic" disabled>Anthropic Claude 3.5 (Module Not Installed)</option>
                   </select>
-                  <div className="absolute right-3 top-3.5 text-green-500 pointer-events-none">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]"></div>
+                  <div className="absolute right-3 top-3.5 text-lab-cyan pointer-events-none">
+                    <div className="w-2 h-2 rounded-full bg-lab-green animate-pulse shadow-[0_0_8px_#24f6ff]"></div>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-mono text-green-400 uppercase tracking-wider">Access Token</label>
+                <label className="text-xs font-mono text-lab-cyan uppercase tracking-wider">Access Token</label>
                 <div className="flex gap-2">
                   <input 
                     type="password" 
                     value="********************************" 
                     disabled 
-                    className="flex-1 bg-slate-950 border border-slate-700 text-slate-500 text-sm font-mono rounded p-3 cursor-not-allowed"
+                    className="flex-1 bg-lab-bg border border-lab-line text-lab-muted text-sm font-mono rounded p-3 cursor-not-allowed"
                   />
-                  <div className="bg-slate-800 border border-slate-700 text-xs font-mono text-slate-400 rounded p-3 flex items-center">
+                  <div className="bg-lab-panel border border-lab-line text-xs font-mono text-lab-muted rounded p-3 flex items-center">
                     System Env
                   </div>
                 </div>
-                <p className="text-[10px] text-slate-500 font-mono">
+                <p className="text-[10px] text-lab-muted font-mono">
                   * Key loaded securely from project environment. Manual override disabled by protocol.
                 </p>
               </div>
 
-              <hr className="border-slate-800" />
+              <hr className="border-lab-line" />
 
               {/* Danger Zone */}
               <div className="space-y-3">

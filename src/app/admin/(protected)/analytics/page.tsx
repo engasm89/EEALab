@@ -11,7 +11,7 @@ export default async function AdminAnalyticsPage({
   await requireAdminAction(ACTIONS.ANALYTICS_READ);
   const params = await searchParams;
   const supabase = getSupabaseServerClient();
-  if (!supabase) return <div className="text-sm text-muted">Supabase not configured.</div>;
+  if (!supabase) return <div className="text-sm text-muted-foreground">Supabase not configured.</div>;
 
   let eventsQuery = supabase
     .from("analytics_events")
@@ -36,7 +36,7 @@ export default async function AdminAnalyticsPage({
         <h1 className="text-2xl font-semibold">Analytics</h1>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-muted">
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-muted-foreground">
         <div className="flex flex-wrap gap-2">
           <FilterLink label="All" href="/admin/analytics" />
           <FilterLink label="Email signups" href="/admin/analytics?event=email_signup" />
@@ -51,7 +51,7 @@ export default async function AdminAnalyticsPage({
           {(projectCounts ?? []).slice(0, 10).map((row, idx) => (
             <div key={`${row.project_slug}-${row.event_name}-${idx}`} className="rounded-xl border border-white/10 bg-background/20 p-3">
               <div className="text-sm font-semibold">{row.project_slug}</div>
-              <div className="text-xs text-muted">{row.event_name}</div>
+              <div className="text-xs text-muted-foreground">{row.event_name}</div>
               <div className="mt-1 text-xl font-semibold">{row.total_events}</div>
             </div>
           ))}
@@ -62,7 +62,7 @@ export default async function AdminAnalyticsPage({
         <h2 className="text-lg font-semibold">Conversion by Category</h2>
         <div className="mt-3 overflow-hidden rounded-xl border border-white/10">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-muted">
+            <thead className="bg-white/5 text-muted-foreground">
               <tr>
                 <th className="px-3 py-2 text-left">Category</th>
                 <th className="px-3 py-2 text-left">Project Opens</th>
@@ -88,7 +88,7 @@ export default async function AdminAnalyticsPage({
         <h2 className="text-lg font-semibold">Conversion by Source/Campaign</h2>
         <div className="mt-3 overflow-hidden rounded-xl border border-white/10">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-muted">
+            <thead className="bg-white/5 text-muted-foreground">
               <tr>
                 <th className="px-3 py-2 text-left">Source</th>
                 <th className="px-3 py-2 text-left">Medium</th>
@@ -118,7 +118,7 @@ export default async function AdminAnalyticsPage({
         <h2 className="text-lg font-semibold">Recent Event Stream</h2>
         <div className="mt-3 overflow-hidden rounded-xl border border-white/10">
           <table className="w-full text-xs">
-            <thead className="bg-white/5 text-muted">
+            <thead className="bg-white/5 text-muted-foreground">
               <tr>
                 <th className="px-3 py-2 text-left">Time</th>
                 <th className="px-3 py-2 text-left">Event</th>

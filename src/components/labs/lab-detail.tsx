@@ -54,7 +54,7 @@ export function LabDetail({ lab }: LabDetailProps) {
                     {lab.category.toLowerCase()}
                   </Badge>
                   {lab.verified && (
-                    <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                    <Badge className="border border-accent2/30 bg-accent2/15 text-accent2">
                       <Shield className="w-3 h-3 mr-1" />
                       Verified
                     </Badge>

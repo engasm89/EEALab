@@ -19,6 +19,6 @@ export function StatusBadge({ status }: { status: ProjectStatus }) {
     return <span className={`${base} border-accent2/35 bg-accent2/10 text-accent2`}>{cfg.label}</span>;
   }
 
-  return <span className={`${base} border-white/15 bg-white/5 text-muted`}>{cfg.label}</span>;
+  return <span className={`${base} border-white/15 bg-white/5 text-muted-foreground`}>{cfg.label}</span>;
 }
 

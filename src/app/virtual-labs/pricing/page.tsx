@@ -55,7 +55,7 @@ export default function PricingPage() {
               <CardContent className="space-y-4">
                 {plan.features.map((feature, featureIndex) => (
                   <div key={featureIndex} className="flex items-center gap-3">
-                    <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    <Check className="h-5 w-5 text-accent2 flex-shrink-0" />
                     <span className="text-sm">{feature}</span>
                   </div>
                 ))}

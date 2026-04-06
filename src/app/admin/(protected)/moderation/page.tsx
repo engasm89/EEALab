@@ -3,7 +3,7 @@ import { AdminModerationBoard } from "@/components/admin/AdminModerationBoard";
 
 export default async function AdminModerationPage() {
   const supabase = getSupabaseServerClient();
-  if (!supabase) return <div className="text-sm text-muted">Supabase not configured.</div>;
+  if (!supabase) return <div className="text-sm text-muted-foreground">Supabase not configured.</div>;
 
   const [{ data: feedbackRows }, { data: requestRows }] = await Promise.all([
     supabase.from("feedback").select("id, comment, created_at, visibility_status, is_featured").order("created_at", { ascending: false }).limit(100),

@@ -8,7 +8,7 @@ export function ProjectsGridSection({ projects }: { projects: Project[] }) {
         <div>
           <div className="text-xs font-semibold tracking-wide text-accent">ACTIVE BUILDS</div>
           <h2 className="mt-3 text-2xl font-semibold">Unfinished? No. In-progress with receipts.</h2>
-          <p className="mt-2 text-sm text-muted">
+          <p className="mt-2 text-sm text-muted-foreground">
             Every project has a problem, a measurable next step, and a build log you can follow.
           </p>
         </div>

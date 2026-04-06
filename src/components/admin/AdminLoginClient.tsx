@@ -53,7 +53,7 @@ export function AdminLoginClient({ nextPath }: { nextPath: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
       <h1 className="text-2xl font-semibold">Admin Sign In</h1>
-      <p className="mt-2 text-sm text-muted">Use your admin account to manage projects, moderation, and lifecycle.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Use your admin account to manage projects, moderation, and lifecycle.</p>
 
       <form onSubmit={loginWithPassword} className="mt-6 space-y-4">
         <input
@@ -89,7 +89,7 @@ export function AdminLoginClient({ nextPath }: { nextPath: string }) {
         Send magic link
       </button>
 
-      {message ? <p className="mt-3 text-sm text-muted">{message}</p> : null}
+      {message ? <p className="mt-3 text-sm text-muted-foreground">{message}</p> : null}
     </div>
   );
 }

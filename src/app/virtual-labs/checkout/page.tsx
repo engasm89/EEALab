@@ -115,7 +115,7 @@ export default function CheckoutPage() {
               <div className="space-y-3">
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <Check className="h-5 w-5 text-green-500" />
+                    <Check className="h-5 w-5 text-accent2" />
                     <span className="text-sm">{feature}</span>
                   </div>
                 ))}

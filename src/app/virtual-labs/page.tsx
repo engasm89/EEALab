@@ -2,28 +2,24 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { 
-  ArrowRight, 
-  Beaker, 
-  Cpu, 
-  Zap, 
-  Circle, 
-  Microscope, 
-  Rocket, 
+import {
+  ArrowRight,
+  Beaker,
+  Cpu,
+  Circle,
+  Microscope,
+  Rocket,
   Brain,
   Code,
   FlaskConical,
   CircuitBoard,
-  Lightbulb
 } from "lucide-react"
 
-export default function HomePage() {
+export default function VirtualLabsHomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
-      {/* Scientific Background Pattern */}
-      <div className="absolute inset-0 scientific-grid opacity-[0.02] pointer-events-none" />
+    <div className="relative overflow-hidden">
+      <div className="absolute inset-0 scientific-grid opacity-[0.04] pointer-events-none" />
       
-      {/* Floating Scientific Elements */}
       <div className="absolute top-20 left-10 floating opacity-20">
         <Circle className="h-16 w-16 text-primary/30" />
       </div>
@@ -34,318 +30,192 @@ export default function HomePage() {
         <FlaskConical className="h-14 w-14 text-secondary/30" />
       </div>
 
-      {/* Header */}
-      <header className="border-b border-border/50 backdrop-blur-sm bg-background/80 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Beaker className="h-8 w-8 text-primary" />
-              <div className="absolute -top-1 -right-1 h-3 w-3 bg-accent rounded-full pulse-glow" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              VirtualLabs
-            </span>
-          </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/virtual-labs/labs" className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium">
-              Browse Labs
-            </Link>
-            <Link href="/virtual-labs/pricing" className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium">
-              Pricing
-            </Link>
-            <Link href="/virtual-labs/support" className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium">
-              Support
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" asChild className="hover:bg-primary/10">
-              <Link href="/virtual-labs/auth/signin">Sign In</Link>
-            </Button>
-            <Button asChild className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-200">
-              <Link href="/virtual-labs/auth/signup">Get Started</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-24 text-center relative">
-        <div className="max-w-4xl mx-auto">
-          <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors duration-200">
-            <Rocket className="w-4 h-4 mr-2" />
-            Interactive STEM Learning Platform
+      <section className="relative mx-auto w-full max-w-6xl px-4 py-16 text-center md:py-20">
+        <div className="eea-gridlines rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-12">
+          <Badge variant="secondary" className="mb-6 border border-primary/25 bg-primary/10 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/15">
+            <Rocket className="mr-2 h-4 w-4" />
+            Interactive STEM learning
           </Badge>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-              Discover.
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent">
-              Learn.
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-accent via-secondary to-primary bg-clip-text text-transparent">
-              Create.
+          <h1 className="mb-6 text-balance text-4xl font-semibold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+            <span className="bg-gradient-to-r from-primary via-accent to-accent2 bg-clip-text text-transparent">
+              Discover. Learn. Create.
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
-            Access thousands of interactive labs, run simulations in your browser, and publish your own educational
-            content. Experience the future of STEM education.
+          <p className="mx-auto mb-10 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+            Run interactive labs in your browser, ship simulations, and publish your own STEM content — aligned with the rest of Ashraf Engineering Lab.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button size="lg" asChild className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-105">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button size="lg" asChild className="rounded-full bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground shadow-[0_0_0_1px_rgba(36,246,255,0.35),0_0_24px_rgba(36,246,255,0.18)] transition hover:brightness-110">
               <Link href="/virtual-labs/labs">
-                <Beaker className="mr-3 h-5 w-5" />
-                Explore Labs
-                <ArrowRight className="ml-3 h-5 w-5" />
+                <Beaker className="mr-2 h-5 w-5" />
+                Explore labs
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 border-2 hover:bg-primary/10 hover:border-primary transition-all duration-200 hover:scale-105">
+            <Button size="lg" variant="outline" asChild className="rounded-full border-2 border-white/15 bg-white/5 px-8 py-6 text-lg hover:border-primary/40 hover:bg-primary/10">
               <Link href="/virtual-labs/auth/signup">
-                <Rocket className="mr-3 h-5 w-5" />
-                Start Free Trial
+                <Rocket className="mr-2 h-5 w-5" />
+                Get started
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="container mx-auto px-4 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Why Choose VirtualLabs?
+      <section className="mx-auto w-full max-w-6xl px-4 pb-20">
+        <div className="mb-12 text-center">
+          <div className="text-xs font-semibold tracking-wide text-accent">WHY VIRTUALLABS</div>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+            Built for educators and curious builders
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Built for educators and students who demand the best learning experience with cutting-edge technology
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+            Same dark lab aesthetic and focus as the main site — tuned for hands-on STEM.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          <Card className="lab-card interactive-element group border-0 shadow-lg hover:shadow-2xl">
-            <CardHeader className="text-center pb-6">
-              <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl w-20 h-20 flex items-center justify-center">
-                <Cpu className="h-10 w-10 text-primary" />
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card className="lab-card interactive-element rounded-2xl border border-white/10 bg-white/5 shadow-none backdrop-blur-sm">
+            <CardHeader className="pb-4 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-primary/10">
+                <Cpu className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl text-primary">Lightning Fast</CardTitle>
-              <CardDescription className="text-base">
-                Ultra-concurrent simulations with no queues or waiting times
+              <CardTitle className="text-xl text-foreground">Fast runs</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Launch labs without leaving the browser.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-primary rounded-full" />
-                  <span className="text-sm">Instant lab launches</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-accent rounded-full" />
-                  <span className="text-sm">Real-time collaboration</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-secondary rounded-full" />
-                  <span className="text-sm">Edge-cached content</span>
-                </div>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                Instant sessions
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Real-time feedback
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent2" />
+                Edge-friendly assets
               </div>
             </CardContent>
           </Card>
 
-          <Card className="lab-card interactive-element group border-0 shadow-lg hover:shadow-2xl">
-            <CardHeader className="text-center pb-6">
-              <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-accent/10 to-secondary/10 rounded-2xl w-20 h-20 flex items-center justify-center">
-                <Code className="h-10 w-10 text-accent" />
+          <Card className="lab-card interactive-element rounded-2xl border border-white/10 bg-white/5 shadow-none backdrop-blur-sm">
+            <CardHeader className="pb-4 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-accent/10">
+                <Code className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-2xl text-accent">Powerful IDE</CardTitle>
-              <CardDescription className="text-base">
-                Full-featured development environment with Monaco Editor
+              <CardTitle className="text-xl text-foreground">In-browser IDE</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Monaco, console, and simulation chrome in one place.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-primary rounded-full" />
-                  <span className="text-sm">Syntax highlighting</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-accent rounded-full" />
-                  <span className="text-sm">Real-time console</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-secondary rounded-full" />
-                  <span className="text-sm">Hardware simulation</span>
-                </div>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                Syntax highlighting
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Structured logging
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent2" />
+                Hardware-style sims
               </div>
             </CardContent>
           </Card>
 
-          <Card className="lab-card interactive-element group border-0 shadow-lg hover:shadow-2xl">
-            <CardHeader className="text-center pb-6">
-              <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-2xl w-20 h-20 flex items-center justify-center">
-                <Brain className="h-10 w-10 text-secondary" />
+          <Card className="lab-card interactive-element rounded-2xl border border-white/10 bg-white/5 shadow-none backdrop-blur-sm">
+            <CardHeader className="pb-4 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-accent2/10">
+                <Brain className="h-8 w-8 text-accent2" />
               </div>
-              <CardTitle className="text-2xl text-secondary">Multi-Tenant</CardTitle>
-              <CardDescription className="text-base">
-                Complete organization management with roles and permissions
+              <CardTitle className="text-xl text-foreground">Orgs &amp; roles</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Multi-tenant flows for classrooms and teams.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-primary rounded-full" />
-                  <span className="text-sm">Classroom management</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-accent rounded-full" />
-                  <span className="text-sm">Usage analytics</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="h-2 w-2 bg-secondary rounded-full" />
-                  <span className="text-sm">Custom branding</span>
-                </div>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                Invites &amp; switching
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Usage visibility
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent2" />
+                Publish pipeline
               </div>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Interactive Demo Section */}
-      <section className="container mx-auto px-4 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Experience the Future
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            See how VirtualLabs transforms complex concepts into interactive learning experiences
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-primary/10 rounded-xl">
-                  <Microscope className="h-6 w-6 text-primary" />
+      <section className="mx-auto w-full max-w-6xl px-4 pb-24">
+        <div className="eea-gridlines rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10">
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div className="space-y-6">
+              <div className="text-xs font-semibold tracking-wide text-accent">INSIDE A LAB</div>
+              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+                Simulations, circuits, and safe experiments
+              </h2>
+              <div className="space-y-4 text-sm text-muted-foreground">
+                <div className="flex gap-3">
+                  <div className="rounded-lg border border-white/10 bg-primary/10 p-2">
+                    <Microscope className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-foreground">Interactive runs</div>
+                    <p>Experiment in the browser with deterministic sim workers.</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Interactive Simulations</h3>
-                  <p className="text-muted-foreground">Run real-time experiments without leaving your browser</p>
+                <div className="flex gap-3">
+                  <div className="rounded-lg border border-white/10 bg-accent/10 p-2">
+                    <CircuitBoard className="h-5 w-5 text-accent" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-foreground">Circuits &amp; pins</div>
+                    <p>Visual feedback for embedded-style labs.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-accent/10 rounded-xl">
-                  <CircuitBoard className="h-6 w-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Circuit Design</h3>
-                  <p className="text-muted-foreground">Build and test electronic circuits with visual feedback</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-secondary/10 rounded-xl">
-                  <FlaskConical className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Chemical Reactions</h3>
-                  <p className="text-muted-foreground">Explore molecular interactions in safe virtual environments</p>
+                <div className="flex gap-3">
+                  <div className="rounded-lg border border-white/10 bg-accent2/10 p-2">
+                    <FlaskConical className="h-5 w-5 text-accent2" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-foreground">STEM breadth</div>
+                    <p>Physics, code, and systems thinking in one product surface.</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div className="relative">
-            <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl p-8 border border-primary/20">
-              <div className="bg-background rounded-2xl p-6 shadow-xl">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="h-3 w-3 bg-red-500 rounded-full" />
-                  <div className="h-3 w-3 bg-yellow-500 rounded-full" />
-                  <div className="h-3 w-3 bg-green-500 rounded-full" />
+            <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-accent/10 p-6">
+              <div className="rounded-xl border border-white/10 bg-background/80 p-5 backdrop-blur-sm">
+                <div className="mb-4 flex gap-2">
+                  <div className="h-3 w-3 rounded-full bg-red-500/80" />
+                  <div className="h-3 w-3 rounded-full bg-amber-400/80" />
+                  <div className="h-3 w-3 rounded-full bg-accent2/80" />
                 </div>
-                <div className="space-y-3">
-                  <div className="h-4 bg-muted rounded w-3/4" />
-                  <div className="h-4 bg-muted rounded w-1/2" />
-                  <div className="h-4 bg-muted rounded w-5/6" />
+                <div className="space-y-2">
+                  <div className="h-3 w-4/5 max-w-[280px] rounded bg-muted" />
+                  <div className="h-3 w-3/5 max-w-[200px] rounded bg-muted" />
+                  <div className="h-3 w-full max-w-[320px] rounded bg-muted" />
                 </div>
-                <div className="mt-6 p-4 bg-primary/10 rounded-lg">
-                  <div className="text-sm text-primary font-mono">&gt; Running simulation...</div>
-                  <div className="text-sm text-primary font-mono">&gt; Results: Success!</div>
+                <div className="mt-5 rounded-lg border border-primary/20 bg-primary/10 p-3 font-mono text-xs text-primary">
+                  <div>&gt; Running simulation…</div>
+                  <div>&gt; OK</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border/50 bg-muted/30 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-16">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="relative">
-                  <Beaker className="h-8 w-8 text-primary" />
-                  <div className="absolute -top-1 -right-1 h-3 w-3 bg-accent rounded-full" />
-                </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  VirtualLabs
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Interactive learning platform for STEM education, empowering the next generation of innovators and scientists.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-6 text-primary">Product</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/virtual-labs/labs" className="hover:text-primary transition-colors duration-200">Browse Labs</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/publish" className="hover:text-primary transition-colors duration-200">Publish Lab</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/pricing" className="hover:text-primary transition-colors duration-200">Pricing</Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-6 text-accent">Support</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/virtual-labs/support" className="hover:text-accent transition-colors duration-200">Help Center</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/support/webinars" className="hover:text-accent transition-colors duration-200">Webinars</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/support/contact" className="hover:text-accent transition-colors duration-200">Contact</Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-6 text-secondary">Legal</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/virtual-labs/legal/terms" className="hover:text-secondary transition-colors duration-200">Terms</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/legal/privacy" className="hover:text-secondary transition-colors duration-200">Privacy</Link>
-                </li>
-                <li>
-                  <Link href="/virtual-labs/legal/cookies" className="hover:text-secondary transition-colors duration-200">Cookies</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border/50 mt-12 pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              &copy; 2024 VirtualLabs. All rights reserved. Empowering STEM education worldwide.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

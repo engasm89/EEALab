@@ -12,7 +12,7 @@ const labels: Record<FeatureRequestStatus, string> = {
 export function FeatureRequestBoard({ requests }: { requests: FeatureRequest[] }) {
   if (!requests.length) {
     return (
-      <div className="rounded-xl border border-white/10 bg-background/20 p-4 text-sm text-muted">
+      <div className="rounded-xl border border-white/10 bg-background/20 p-4 text-sm text-muted-foreground">
         No feature requests yet.
       </div>
     );
@@ -28,7 +28,7 @@ export function FeatureRequestBoard({ requests }: { requests: FeatureRequest[] }
             <div className="text-sm font-semibold">{labels[status]}</div>
             <div className="mt-2 space-y-2">
               {group.slice(0, 4).map((r) => (
-                <div key={r.id} className="rounded-lg border border-white/10 bg-background/30 p-3 text-xs text-muted">
+                <div key={r.id} className="rounded-lg border border-white/10 bg-background/30 p-3 text-xs text-muted-foreground">
                   <div className="text-sm text-foreground">{r.request_text}</div>
                   {r.public_note ? <div className="mt-1">{r.public_note}</div> : null}
                   {r.target_release ? <div className="mt-1">Target: {r.target_release}</div> : null}

@@ -29,7 +29,7 @@ export default async function Home({
         <div className="eea-gridlines rounded-[2rem] border border-white/10 bg-white/5 p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="text-xs font-semibold tracking-wide text-muted">CATEGORIES</div>
+              <div className="text-xs font-semibold tracking-wide text-muted-foreground">CATEGORIES</div>
               <div className="mt-1 text-sm text-foreground">
                 Filter active builds by what you want to learn or ship.
               </div>

@@ -14,7 +14,7 @@ export default async function AdminProjectsPage() {
       </div>
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-muted">
+          <thead className="bg-white/5 text-muted-foreground">
             <tr>
               <th className="px-4 py-3 text-left">Name</th>
               <th className="px-4 py-3 text-left">Status</th>

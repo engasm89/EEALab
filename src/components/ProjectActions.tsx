@@ -99,7 +99,7 @@ export function ProjectActions({
           className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-white/8 disabled:opacity-60"
         >
           {upvoteStatus === "submitting" ? "Upvoting..." : "Upvote this idea"}
-          <span className="font-mono text-xs text-muted">+{upvotes}</span>
+          <span className="font-mono text-xs text-muted-foreground">+{upvotes}</span>
         </button>
         <input
           value={honeypot}
@@ -109,7 +109,7 @@ export function ProjectActions({
           autoComplete="off"
           aria-hidden
         />
-        <div className="text-xs text-muted">
+        <div className="text-xs text-muted-foreground">
           Feature requests: <span className="font-semibold text-foreground">{featureRequests}</span>
         </div>
       </div>
