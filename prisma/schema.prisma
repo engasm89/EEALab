@@ -53,6 +53,16 @@ model User {
   reviewedRequests PublishRequest[] @relation("PublishRequestReviewer")
   feedback        Feedback[]
 
+  momentumProfile              MomentumProfile?
+  momentumSubscriptions        MomentumSubscription[]
+  momentumLessonProgresses     MomentumLessonProgress[]
+  momentumUserProjects         MomentumUserProject[]
+  momentumDailyRituals         MomentumDailyRitual[]
+  momentumWeeklyReviews        MomentumWeeklyReview[]
+  momentumCommunityPosts       MomentumCommunityPost[]
+  momentumCommunityComments    MomentumCommunityComment[]
+  momentumStaffGrant           MomentumStaffGrant?
+
   @@map("users")
 }
 
@@ -305,4 +315,310 @@ enum WebinarAudience {
   SCHOOLS
   HIGHER_ED
   ALL
+}
+
+// --- Kaizen Momentum (B2C learner SaaS; separate from org-scoped VirtualLabs billing) ---
+
+enum MomentumPlanTier {
+  FREE
+  PRO
+}
+
+enum MomentumSubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  UNPAID
+  TRIALING
+}
+
+enum MomentumLessonProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum MomentumUserProjectStatus {
+  ACTIVE
+  COMPLETED
+}
+
+enum MomentumSubmissionStatus {
+  DRAFT
+  SUBMITTED
+}
+
+enum MomentumCommunityPostStatus {
+  PUBLISHED
+  HIDDEN
+}
+
+enum MomentumStaffRole {
+  ADMIN
+  MENTOR
+}
+
+model MomentumProfile {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  timezone         String    @default("UTC")
+  weeklyHours      Int?
+  focusTrack       String?
+  onboardingDoneAt DateTime?
+  preferences      Json?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("momentum_profiles")
+}
+
+model MomentumBillingPlan {
+  id                 String           @id @default(cuid())
+  name               String
+  tier               MomentumPlanTier
+  stripePriceId      String?
+  monthlyAmountCents Int?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  subscriptions MomentumSubscription[]
+
+  @@map("momentum_billing_plans")
+}
+
+model MomentumSubscription {
+  id                   String                     @id @default(cuid())
+  userId               String
+  planId               String
+  stripeCustomerId     String
+  stripeSubscriptionId String                     @unique
+  status               MomentumSubscriptionStatus
+  currentPeriodEnd     DateTime
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+
+  user User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan MomentumBillingPlan @relation(fields: [planId], references: [id])
+
+  @@index([userId])
+  @@map("momentum_subscriptions")
+}
+
+model MomentumTrack {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  description String    @default("")
+  level       String    @default("beginner")
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  modules           MomentumModule[]
+  projectTemplates  MomentumProjectTemplate[]
+
+  @@map("momentum_tracks")
+}
+
+model MomentumModule {
+  id        String   @id @default(cuid())
+  trackId   String
+  sortOrder Int      @default(0)
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  track   MomentumTrack   @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  lessons MomentumLesson[]
+
+  @@index([trackId])
+  @@map("momentum_modules")
+}
+
+model MomentumLesson {
+  id         String   @id @default(cuid())
+  moduleId   String
+  slug       String
+  sortOrder  Int      @default(0)
+  title      String
+  type       String   @default("article")
+  contentMd  String   @default("")
+  estMinutes Int      @default(15)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  module     MomentumModule         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progresses MomentumLessonProgress[]
+
+  @@unique([moduleId, slug])
+  @@index([moduleId])
+  @@map("momentum_lessons")
+}
+
+model MomentumLessonProgress {
+  id           String                       @id @default(cuid())
+  userId       String
+  lessonId     String
+  status       MomentumLessonProgressStatus @default(NOT_STARTED)
+  lastPosition Int                          @default(0)
+  completedAt  DateTime?
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+
+  user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson MomentumLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@map("momentum_lesson_progress")
+}
+
+model MomentumProjectTemplate {
+  id              String   @id @default(cuid())
+  trackId         String?
+  title           String
+  description     String   @default("")
+  estimatedHours  Int?
+  templateKey     String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  track       MomentumTrack?                    @relation(fields: [trackId], references: [id], onDelete: SetNull)
+  milestones  MomentumProjectTemplateMilestone[]
+  userProjects MomentumUserProject[]
+
+  @@map("momentum_project_templates")
+}
+
+model MomentumProjectTemplateMilestone {
+  id          String   @id @default(cuid())
+  templateId  String
+  sortOrder   Int      @default(0)
+  title       String
+  description String   @default("")
+
+  template MomentumProjectTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@index([templateId])
+  @@map("momentum_project_template_milestones")
+}
+
+model MomentumUserProject {
+  id          String                   @id @default(cuid())
+  userId      String
+  templateId  String
+  status      MomentumUserProjectStatus @default(ACTIVE)
+  startedAt   DateTime                 @default(now())
+  completedAt DateTime?
+
+  user         User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template     MomentumProjectTemplate   @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  submissions  MomentumProjectSubmission[]
+  completions  MomentumMilestoneCompletion[]
+
+  @@index([userId])
+  @@map("momentum_user_projects")
+}
+
+model MomentumMilestoneCompletion {
+  id                  String   @id @default(cuid())
+  userProjectId       String
+  templateMilestoneId String
+  completedAt         DateTime @default(now())
+
+  userProject MomentumUserProject @relation(fields: [userProjectId], references: [id], onDelete: Cascade)
+
+  @@unique([userProjectId, templateMilestoneId])
+  @@map("momentum_milestone_completions")
+}
+
+model MomentumProjectSubmission {
+  id                  String                   @id @default(cuid())
+  userProjectId       String
+  templateMilestoneId String?
+  body                String?
+  url                 String?
+  status              MomentumSubmissionStatus @default(SUBMITTED)
+  createdAt           DateTime                 @default(now())
+
+  userProject MomentumUserProject @relation(fields: [userProjectId], references: [id], onDelete: Cascade)
+
+  @@index([userProjectId])
+  @@map("momentum_project_submissions")
+}
+
+model MomentumDailyRitual {
+  id              String    @id @default(cuid())
+  userId          String
+  day             DateTime  @db.Date
+  brainDump       String    @default("")
+  highlightText   String    @default("")
+  microCommitment String    @default("")
+  energy          Int?
+  mode            String    @default("normal")
+  completedAt     DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, day])
+  @@index([userId])
+  @@map("momentum_daily_rituals")
+}
+
+model MomentumWeeklyReview {
+  id              String   @id @default(cuid())
+  userId          String
+  weekStart       DateTime @db.Date
+  responsesJson   Json
+  commitmentsJson Json
+  createdAt       DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekStart])
+  @@index([userId])
+  @@map("momentum_weekly_reviews")
+}
+
+model MomentumCommunityPost {
+  id        String                      @id @default(cuid())
+  authorId  String
+  category  String
+  title     String
+  body      String
+  status    MomentumCommunityPostStatus @default(PUBLISHED)
+  createdAt DateTime                  @default(now())
+
+  author   User                      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments MomentumCommunityComment[]
+
+  @@index([authorId])
+  @@map("momentum_community_posts")
+}
+
+model MomentumCommunityComment {
+  id        String   @id @default(cuid())
+  postId    String
+  authorId  String
+  body      String
+  createdAt DateTime @default(now())
+
+  post   MomentumCommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User                  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+  @@map("momentum_community_comments")
+}
+
+model MomentumStaffGrant {
+  id     String            @id @default(cuid())
+  userId String            @unique
+  role   MomentumStaffRole
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("momentum_staff_grants")
 }

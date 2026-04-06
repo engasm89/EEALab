@@ -37,6 +37,9 @@ export function SiteHeader() {
           <Link href="/virtual-labs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             VirtualLabs
           </Link>
+          <Link href="/momentum" className="text-sm font-medium text-accent hover:text-accent/90 transition-colors">
+            Momentum
+          </Link>
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">

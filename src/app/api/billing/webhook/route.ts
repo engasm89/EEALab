@@ -42,6 +42,11 @@ async function handleSubscriptionChange(subscription: Stripe.Subscription) {
   const userId = subscription.metadata.userId
   const organizationId = subscription.metadata.organizationId
 
+  if (subscription.metadata.product === "momentum" && userId) {
+    await handleMomentumSubscriptionChange(subscription, userId)
+    return
+  }
+
   if (!userId) return
 
   const priceId = subscription.items.data[0]?.price.id
@@ -54,50 +59,75 @@ async function handleSubscriptionChange(subscription: Stripe.Subscription) {
     planType = "INSTITUTION"
   }
 
-  // Update user subscription
-  await db.user.update({
-    where: { id: userId },
-    data: {
-      stripeSubscriptionId: subscription.id,
-      subscriptionStatus: subscription.status,
-      subscriptionPlan: planType,
-      subscriptionCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-    },
-  })
-
-  // Update organization if exists
+  // Update organization plan label if linked (Organization uses `plan` string)
   if (organizationId) {
     await db.organization.update({
       where: { id: organizationId },
-      data: {
-        subscriptionPlan: planType,
-        subscriptionStatus: subscription.status,
-      },
+      data: { plan: planType },
     })
   }
+}
+
+async function handleMomentumSubscriptionChange(subscription: Stripe.Subscription, userId: string) {
+  const priceId = subscription.items.data[0]?.price.id
+  let plan = await db.momentumBillingPlan.findFirst({
+    where: { stripePriceId: priceId ?? "" },
+  })
+  if (!plan) {
+    plan = await db.momentumBillingPlan.findFirst({
+      where: { tier: "PRO" },
+      orderBy: { createdAt: "asc" },
+    })
+  }
+  if (!plan) return
+
+  const customerId =
+    typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id
+
+  const statusMap: Record<string, "ACTIVE" | "CANCELED" | "PAST_DUE" | "UNPAID" | "TRIALING"> = {
+    active: "ACTIVE",
+    canceled: "CANCELED",
+    past_due: "PAST_DUE",
+    unpaid: "UNPAID",
+    trialing: "TRIALING",
+  }
+  const status = statusMap[subscription.status] ?? "ACTIVE"
+
+  await db.momentumSubscription.upsert({
+    where: { stripeSubscriptionId: subscription.id },
+    create: {
+      userId,
+      planId: plan.id,
+      stripeCustomerId: customerId,
+      stripeSubscriptionId: subscription.id,
+      status,
+      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+    },
+    update: {
+      status,
+      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+    },
+  })
 }
 
 async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
   const userId = subscription.metadata.userId
   const organizationId = subscription.metadata.organizationId
 
-  if (!userId) return
+  if (subscription.metadata.product === "momentum" && userId) {
+    await db.momentumSubscription.updateMany({
+      where: { stripeSubscriptionId: subscription.id },
+      data: { status: "CANCELED" },
+    })
+    return
+  }
 
-  await db.user.update({
-    where: { id: userId },
-    data: {
-      subscriptionStatus: "canceled",
-      subscriptionPlan: "FREE",
-    },
-  })
+  if (!userId) return
 
   if (organizationId) {
     await db.organization.update({
       where: { id: organizationId },
-      data: {
-        subscriptionPlan: "FREE",
-        subscriptionStatus: "canceled",
-      },
+      data: { plan: "FREE" },
     })
   }
 }

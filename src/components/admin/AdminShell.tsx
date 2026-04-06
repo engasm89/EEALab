@@ -29,6 +29,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           <Link className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs" href="/admin/analytics">
             Analytics
           </Link>
+          <Link className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs" href="/admin/momentum">
+            Momentum
+          </Link>
           <button onClick={logout} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs">
             Logout
           </button>
