@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/lab-auth"
 import { db } from "@/lib/db"
 import { z } from "zod"
+import { blockGuestWrite } from "@/lib/auth/guest-guard"
 
 const inviteSchema = z.object({
   email: z.string().email(),
@@ -11,6 +12,8 @@ const inviteSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    const guestBlock = blockGuestWrite(request)
+    if (guestBlock) return guestBlock
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

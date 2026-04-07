@@ -3,8 +3,15 @@ import { authOptions } from "@/lib/lab-auth"
 import { redirect } from "next/navigation"
 import { db } from "@/lib/db"
 import { OrganizationSettings } from "@/components/org/organization-settings"
+import { cookies } from "next/headers"
+import { verifyToken } from "@/lib/lab-auth"
 
 export default async function OrganizationSettingsPage() {
+  const cookieToken = (await cookies()).get("auth-token")?.value
+  const cookieUser = cookieToken ? (verifyToken(cookieToken) as { guest?: boolean } | null) : null
+  if (cookieUser?.guest) {
+    redirect("/virtual-labs/dashboard")
+  }
   const session = await getServerSession(authOptions)
 
   if (!session?.user?.id) {

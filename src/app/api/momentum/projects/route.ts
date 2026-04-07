@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/lab-auth";
 import { db } from "@/lib/db";
+import { blockGuestWrite } from "@/lib/auth/guest-guard";
 
 function userIdFromRequest(request: NextRequest): string | null {
   const token = request.cookies.get("auth-token")?.value;
@@ -25,6 +26,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const guestBlock = blockGuestWrite(request);
+  if (guestBlock) return guestBlock;
   const userId = userIdFromRequest(request);
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   try {

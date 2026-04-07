@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs"
 import { db } from "@/lib/db"
+import { GUEST_FALLBACK_NAME } from "@/lib/platform-access"
 
 export const authOptions = {
   session: {
@@ -93,6 +94,26 @@ export const auth = async () => null
 export const signIn = async () => {}
 export const signOut = async () => {}
 export const handlers = { GET: () => {}, POST: () => {} }
+
+export type AuthTokenPayload = {
+  id: string
+  email?: string
+  name?: string
+  activeOrgId?: string
+  guest?: boolean
+  role?: "guest" | "user"
+  exp?: number
+}
+
+export function createGuestPayload(): AuthTokenPayload {
+  return {
+    id: "guest-user",
+    email: "guest@local.test",
+    name: GUEST_FALLBACK_NAME,
+    guest: true,
+    role: "guest",
+  }
+}
 
 export function generateToken(payload: any): string {
   // Simple JWT-like token for demo purposes

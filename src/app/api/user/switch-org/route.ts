@@ -3,12 +3,15 @@ import { db } from "@/lib/db"
 import { requireAuth } from "@/lib/utils/auth"
 import { withErrorHandling } from "@/lib/api-response"
 import { z } from "zod"
+import { blockGuestWrite } from "@/lib/auth/guest-guard"
 
 const switchOrgSchema = z.object({
   orgId: z.string(),
 })
 
 export async function POST(req: NextRequest) {
+  const guestBlock = blockGuestWrite(req)
+  if (guestBlock) return guestBlock
   return withErrorHandling(async () => {
     const user = await requireAuth()
     const body = await req.json()

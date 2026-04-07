@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { SignInForm } from "@/components/auth/signin-form"
+import { CookieSignInForm } from "@/components/auth/cookie-signin-form"
+import { GuestLoginButton } from "@/components/auth/guest-login-button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Beaker } from "lucide-react"
+import { GUEST_LOGIN_ENABLED } from "@/lib/platform-access"
 
 export const metadata: Metadata = {
   title: "Sign In - Labs",
@@ -26,7 +28,12 @@ export default function SignInPage() {
             <CardDescription>Sign in to your account to continue</CardDescription>
           </CardHeader>
           <CardContent>
-            <SignInForm />
+            <CookieSignInForm redirectTo="/virtual-labs/dashboard" />
+            {GUEST_LOGIN_ENABLED ? (
+              <div className="mt-3">
+                <GuestLoginButton redirectTo="/virtual-labs/dashboard" />
+              </div>
+            ) : null}
             <div className="mt-6 text-center text-sm">
               <span className="text-muted-foreground">Don't have an account? </span>
               <Link href="/virtual-labs/auth/signup" className="text-primary hover:underline">

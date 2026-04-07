@@ -10,11 +10,14 @@ import { Button } from "@/components/ui/button";
 
 export default async function MomentumDashboardPage() {
   const user = await requireMomentumUser();
-  await db.momentumProfile.upsert({
-    where: { userId: user.id },
-    create: { userId: user.id },
-    update: {},
-  });
+  const isGuest = Boolean((user as { guest?: boolean }).guest);
+  if (!isGuest) {
+    await db.momentumProfile.upsert({
+      where: { userId: user.id },
+      create: { userId: user.id },
+      update: {},
+    });
+  }
 
   const day = new Date();
   const utcDay = new Date(Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate()));
@@ -53,8 +56,8 @@ export default async function MomentumDashboardPage() {
     },
   });
 
-  const consistency = await gentleConsistencyScore(user.id);
-  const momentum = await momentumScoreApprox(user.id);
+  const consistency = isGuest ? 0 : await gentleConsistencyScore(user.id);
+  const momentum = isGuest ? 0 : await momentumScoreApprox(user.id);
   const pro = hasActiveMomentumPro(user);
 
   return (

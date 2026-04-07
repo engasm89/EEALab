@@ -3,9 +3,12 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/lab-auth"
 import { stripe } from "@/lib/stripe"
 import { db } from "@/lib/db"
+import { blockGuestWrite } from "@/lib/auth/guest-guard"
 
 export async function POST(request: NextRequest) {
   try {
+    const guestBlock = blockGuestWrite(request)
+    if (guestBlock) return guestBlock
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

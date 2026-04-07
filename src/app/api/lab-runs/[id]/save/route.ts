@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { requireAuth } from "@/lib/utils/auth"
 import { withErrorHandling } from "@/lib/api-response"
 import { z } from "zod"
+import { blockGuestWrite } from "@/lib/auth/guest-guard"
 
 const saveRunSchema = z.object({
   code: z.string(),
@@ -11,6 +12,8 @@ const saveRunSchema = z.object({
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+  const guestBlock = blockGuestWrite(req)
+  if (guestBlock) return guestBlock
   return withErrorHandling(async () => {
     const user = await requireAuth()
     const body = await req.json()

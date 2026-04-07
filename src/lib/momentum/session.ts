@@ -1,12 +1,23 @@
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/lab-auth";
 import { db } from "@/lib/db";
+import { GUEST_FALLBACK_NAME } from "@/lib/platform-access";
 
 export async function getMomentumUser() {
   const token = (await cookies()).get("auth-token")?.value;
   if (!token) return null;
-  const payload = verifyToken(token) as { id?: string; email?: string } | null;
+  const payload = verifyToken(token) as { id?: string; email?: string; name?: string; guest?: boolean } | null;
   if (!payload?.id) return null;
+  if (payload.guest) {
+    return {
+      id: payload.id,
+      email: payload.email ?? "guest@local.test",
+      name: payload.name ?? GUEST_FALLBACK_NAME,
+      guest: true,
+      momentumProfile: null,
+      momentumSubscriptions: [],
+    };
+  }
   const user = await db.user.findUnique({
     where: { id: payload.id },
     include: {
@@ -18,7 +29,7 @@ export async function getMomentumUser() {
       },
     },
   });
-  return user;
+  return user ? { ...user, guest: false } : null;
 }
 
 export async function requireMomentumUser() {

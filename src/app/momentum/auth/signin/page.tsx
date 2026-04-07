@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CookieSignInForm } from "@/components/auth/cookie-signin-form";
+import { GuestLoginButton } from "@/components/auth/guest-login-button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { GUEST_LOGIN_ENABLED } from "@/lib/platform-access";
 
 export const metadata: Metadata = {
   title: "Sign in — Kaizen Momentum",
@@ -19,6 +21,11 @@ export default function MomentumSignInPage() {
           </CardHeader>
           <CardContent>
             <CookieSignInForm redirectTo="/momentum/app" />
+            {GUEST_LOGIN_ENABLED ? (
+              <div className="mt-3">
+                <GuestLoginButton redirectTo="/momentum/app" />
+              </div>
+            ) : null}
             <div className="mt-6 text-center text-sm">
               <span className="text-muted-foreground">No account? </span>
               <Link href="/virtual-labs/auth/signup" className="text-primary hover:underline">
